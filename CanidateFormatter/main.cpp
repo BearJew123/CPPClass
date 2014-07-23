@@ -3,7 +3,9 @@
 
 using namespace std;
 
-
+//Adaptaion for original program
+//any changes will be marked as such in the below comment
+//@ Changes Made comment
 
 //Canidate struct
 struct Canidate{
@@ -25,13 +27,24 @@ void CalculateAverages(Canidate cans[], int size);
 void SortByVotes(Canidate cans[], int size);
 
 //Vars
-const int CANIDATE_NUM = 5;
+//@ removed const so value can be reassigned on input
+int CANIDATE_NUM = 0;
 
-Canidate canidates[CANIDATE_NUM];
+//changed to a pointer so it can be used dynamically
+Canidate* canidates;
 
 int main(int argc, const char * argv[])
 {
-
+    
+    //@ New code, inputs and creates Canidate array
+    //Input and set canidate number
+    cout << "Please enter the number of canidates:" << endl;
+    
+    cin >> CANIDATE_NUM;
+    
+    canidates = new Canidate[CANIDATE_NUM];
+    
+    //input canidates
     cout << "Please enter each canidates first name, last name and the number of votes they received with a space inbetween each" << endl;
     
     for(int i = 0; i < CANIDATE_NUM; i++){
@@ -43,16 +56,16 @@ int main(int argc, const char * argv[])
     SortByVotes(canidates, CANIDATE_NUM);
     CalculateAverages(canidates, CANIDATE_NUM);
     
-    cout << "\nCanidates\tVotes\tVoter Percentiles\n\n";
+    cout << "\nCanidates :: Votes :: Voter Percentiles\n\n";
     
     for(int i = 0; i < CANIDATE_NUM; i++){
         
         cout << canidates[i].lastName << ", " << canidates[i].firstName
-        << "\t" << canidates[i].votes << "\t" << canidates[i].lowPercent * 100.0 << endl;
+        << " :: " << canidates[i].votes << " :: " << canidates[i].lowPercent * 100.0 << endl;
         
     }
     
-    cout << "The Winner of the election is "
+    cout << "\nThe Winner of the election is "
     << canidates[0].firstName << " " << canidates[0].lastName << endl;
     
     return 0;
